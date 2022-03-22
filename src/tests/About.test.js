@@ -33,7 +33,11 @@ describe('Testes do componente <About.js />.', () => {
 
   it('Teste se a url da imagem da pokedex está correta', () => {
     renderWithRouter(<App />);
+
+    const aboutLink = screen.getByRole('link', { name: 'About' });
     const url = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+
+    userEvent.click(aboutLink);
     const image = screen.getByAltText('Pokédex');
     expect(image).toHaveAttribute('src', url);
   });
