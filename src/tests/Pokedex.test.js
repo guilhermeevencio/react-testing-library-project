@@ -15,4 +15,12 @@ describe('Teste o componente <Pokedex.js />', () => {
     );
     expect(headingPokedex).toBeInTheDocument();
   });
+
+  it('O botão deve conter o texto Próximo pokémon', () => {
+    renderWithRouter(
+      <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ {} } />,
+    );
+    const nextPokemonButton = screen.getByRole('button', { name: /próximo pokémon/i });
+    expect(nextPokemonButton).toBeInTheDocument();
+  });
 });
