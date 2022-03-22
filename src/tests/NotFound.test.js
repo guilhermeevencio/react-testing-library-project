@@ -1,11 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import App from '../App';
-import NotFound from '../components/NotFound';
 import renderWithRouter from '../helpers/renderWithRouter';
-import pokemons from '../data';
 
 describe('Teste o componente <NotFound.js />', () => {
   it('Teste se página contém um heading h2 com o texto Page requested not found', () => {
@@ -14,5 +11,15 @@ describe('Teste o componente <NotFound.js />', () => {
 
     const notFoundText = screen.getByText('Page requested not found');
     expect(notFoundText).toBeInTheDocument();
+  });
+
+  it('Teste se página mostra a imagem correta.', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/not-found-page');
+
+    const image = screen.getByAltText(
+      'Pikachu crying because the page requested was not found',
+    );
+    expect(image).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
