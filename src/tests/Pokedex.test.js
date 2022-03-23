@@ -31,7 +31,6 @@ describe('Teste o componente <Pokedex.js />', () => {
     );
     const nextPokemonButton = screen.getByRole('button', { name: /próximo pokémon/i });
     const pokemonName = screen.getByTestId('pokemon-name').textContent;
-    // console.log(pokemonName.textContent);
     const nextPokemon = (pokemon) => {
       let index = 0;
       pokemons.forEach((pok, i) => {
