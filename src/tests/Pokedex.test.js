@@ -65,10 +65,29 @@ describe('Teste se a Pokédex tem os botões de filtro.', () => {
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ {} } />,
     );
 
-    const types = pokemons.reduce((acc, { type }) => ([...acc, type]), ['All']);
-    types.forEach((type) => {
-      const typeButton = screen.getByRole('button', { name: type });
-      expect(typeButton).toBeInTheDocument();
+    const typesData = pokemons.reduce((acc, { type }) => ([...acc, type]), []);
+    const typeButton = screen.getAllByTestId('pokemon-type-button');
+
+    typesData.forEach((type) => {
+      const typeToFilter = typeButton
+        .filter(({ textContent }) => textContent === type);
+      expect(typeToFilter[0]).toBeInTheDocument();
+      userEvent.click(typeToFilter[0]);
+      const { textContent } = screen.getByTestId('pokemon-type');
+      expect(textContent).toBe(type);
     });
+  });
+
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(
+      <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ {} } />,
+    );
+
+    const allButton = screen.getByRole('button', { name: 'All' });
+    expect(allButton).toBeInTheDocument();
+    userEvent.click(allButton);
+    const typesData = pokemons.reduce((acc, { type }) => ([...acc, type]), []);
+    const { textContent } = screen.getByTestId('pokemon-type');
+    expect(typesData).toContain(textContent);
   });
 });
