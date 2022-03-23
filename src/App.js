@@ -8,7 +8,7 @@ import {
   Pokedex,
   PokemonDetails,
 } from './components';
-
+import Locations from './components/Locations';
 import {
   readFavoritePokemonIds,
   updateFavoritePokemons,
@@ -86,6 +86,7 @@ class App extends Component {
           render={ () => <FavoritePokemons pokemons={ favoritePokemons } /> }
         />
         <Route path="/about" component={ About } />
+        <Route path="/locations" component={ Locations } />
         <Route component={ NotFound } />
       </Switch>
     );
@@ -99,6 +100,7 @@ class App extends Component {
           <Link className="link" to="/">{`Home`}</Link>
           <Link className="link" to="/about">{`About`}</Link>
           <Link className="link" to="/favorites">{`Favorite Pokémons`}</Link>
+          <Link className="link" to="/locations">{`Locations`}</Link>
         </nav>
         {this.renderRoutes()}
       </div>
