@@ -39,4 +39,12 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(pokemonImage).toHaveAttribute('src', image);
     expect(pokemonImage).toHaveAttribute('alt', `${name} sprite`);
   });
+
+  it('Teste se o card do Pokémon na Pokédex contém um link de navegação.', () => {
+    renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite={ false } />);
+    const detailsLink = screen.getByRole('link', { name: 'More details' });
+    expect(detailsLink).toBeInTheDocument();
+    const { id } = pokemons[0];
+    expect(detailsLink).toHaveAttribute('href', `/pokemons/${id}`);
+  });
 });
