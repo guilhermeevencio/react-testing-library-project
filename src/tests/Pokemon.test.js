@@ -47,4 +47,33 @@ describe('Teste o componente <Pokemon.js />', () => {
     const { id } = pokemons[0];
     expect(detailsLink).toHaveAttribute('href', `/pokemons/${id}`);
   });
+
+  it('Ao clicar no link de navegação do Pokémon, é feito o redirecionamento...', () => {
+    const { history } = renderWithRouter(
+      <Pokemon
+        pokemon={ pokemons[0] }
+        isFavorite
+      />,
+    );
+    const detailsLink = screen.getByRole('link', { name: 'More details' });
+    const { id } = pokemons[0];
+    const path = `/pokemons/${id}`;
+    userEvent.click(detailsLink);
+    const { pathname } = history.location;
+    expect(pathname).toBe(path);
+  });
+
+  it('Teste se existe um ícone de estrela nos Pokémons favoritados.', () => {
+    renderWithRouter(
+      <Pokemon
+        pokemon={ pokemons[0] }
+        isFavorite
+      />,
+    );
+    const { name } = pokemons[0];
+
+    const favIcon = screen.getByAltText(`${name} is marked as favorite`);
+    expect(favIcon).toBeInTheDocument();
+    expect(favIcon).toHaveAttribute('src', '/star-icon.svg');
+  });
 });
