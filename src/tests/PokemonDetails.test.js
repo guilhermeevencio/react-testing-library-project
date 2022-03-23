@@ -73,7 +73,7 @@ describe('Teste o componente <PokemonDetails.js />', () => {
     expect(checkbox).toBeInTheDocument();
   });
 
-  it('Game Location', () => {
+  it(' Verifica se existe o texto Game Location', () => {
     renderWithRouter(
       <PokemonDetails
         isPokemonFavoriteById={ {} }
