@@ -39,7 +39,7 @@ describe('Teste o componente <PokemonDetails.js />', () => {
     expect(detailsLink).toBe(null);
   });
 
-  it('A seção de detalhes deve conter um heading h2 com o texto Summary.', () => {
+  it('A seção de detalhes deve conter um heading com o texto Summary e um <p>.', () => {
     renderWithRouter(
       <PokemonDetails
         isPokemonFavoriteById={ {} }
@@ -53,5 +53,9 @@ describe('Teste o componente <PokemonDetails.js />', () => {
 
     const summaryHeading = screen.getByRole('heading', { level: 2, name: 'Summary' });
     expect(summaryHeading).toBeInTheDocument();
+
+    const { summary } = pokemons[0];
+    const pokemonAbstract = screen.getByText(summary);
+    expect(pokemonAbstract).toBeInTheDocument();
   });
 });
