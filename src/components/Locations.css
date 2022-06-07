@@ -1,3 +1,7 @@
 h2 {
   color: red;
 }
+
+li {
+  list-style: none;
+}
